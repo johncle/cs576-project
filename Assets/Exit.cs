@@ -11,7 +11,7 @@ public class Exit : MonoBehaviour
     void Start()
     {
         GameObject level_obj = GameObject.FindGameObjectWithTag("Level");
-        level = level_obj.GetComponent<Level>();\
+        level = level_obj.GetComponent<Level>();
         if (level == null)
         {
             Debug.LogError("Internal error: could not find the Level object - did you remove its 'Level' tag?");
