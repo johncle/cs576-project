@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerBot : MonoBehaviour
 {
-    public float moveSpeed;
-    public float rotationSpeed;
+    float moveSpeed;
+    float rotationSpeed;
 
     bool isRunningInstructions;
 
@@ -24,13 +24,13 @@ public class PlayerBot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed = 5.0f;
+        rotationSpeed = 70.0f;
         isRunningInstructions = false;
         isMovingForwards = false;
         isTurningRight = false;
         isTurningLeft = false;
         isIdling = false;
-        moveSpeed = 5.0f;
-        rotationSpeed = 70.0f;
     }
 
     // Update is called once per frame
@@ -81,8 +81,8 @@ public class PlayerBot : MonoBehaviour
         activeInstructions = instructions;
         isRunningInstructions = true;
         if(instructions[0].Item1 == "Move Forward"){
-            isMovingForwards = true;
             distanceToGo = instructions[0].Item2;
+            isMovingForwards = true;
         }else if(instructions[0].Item1 == "Turn Right"){
             degreesToGo = instructions[0].Item2;
             isTurningRight = true;
@@ -90,8 +90,8 @@ public class PlayerBot : MonoBehaviour
             degreesToGo = instructions[0].Item2;
             isTurningLeft = true;
         }else if(instructions[0].Item1 == "Idle"){
-            isIdling = true;
             timeLeftToIdle = instructions[0].Item2;
+            isIdling = true;
         }
         instructions.RemoveAt(0);
     }
