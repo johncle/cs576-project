@@ -4,30 +4,81 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public class Instruction {
+    public string name;
+    public float value;
+    public Instruction(string _name, float _value){
+        name = _name;
+        value = _value;
+    }
+}
+
+public class InstructionSet {
+    public string type;
+    public List<Instruction> instructionList;
+    public List<string> boolValues;
+    public string boolOperator;
+    public int numIterations;
+
+    // individual operations
+    public InstructionSet(string _type, List<Instruction> _instructionList){
+        type = _type;
+        instructionList = _instructionList;
+    }
+
+    // if statements and while loops (conditionals)
+    public InstructionSet(string _type, List<Instruction> _instructionList, List<string> _boolValues, string _boolOperator){
+        type = _type;
+        instructionList = _instructionList;
+        boolValues = _boolValues;
+        boolOperator = _boolOperator;
+    }
+
+    // for loops
+    public InstructionSet(string _type, List<Instruction> _instructionList, int _numIterations){
+        type = _type;
+        instructionList = _instructionList;
+        numIterations = _numIterations;
+    }
+}
+
 public class ProgramPanel : MonoBehaviour
 {
-    public List<Tuple<string, float>> instructions;
+    public List<InstructionSet> instructions;
 
     GameObject playerBot;
 
     void Start(){
         playerBot = GameObject.Find("Player Bot");
-        instructions = new List<Tuple<string, float>>();
+        instructions = new List<InstructionSet>();
     }
 
-    public void OnRunProgram(){
-        foreach (Transform instruction in transform){
-            if(instruction.gameObject.name.Contains("Move Forward")){
-                instructions.Add(new Tuple<string, float>("Move Forward", float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text)));
-            }else if(instruction.gameObject.name.Contains("Turn Right")){
-                instructions.Add(new Tuple<string, float>("Turn Right", float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text)));
-            }else if(instruction.gameObject.name.Contains("Turn Left")){
-                instructions.Add(new Tuple<string, float>("Turn Left", float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text)));
-            }else if(instruction.gameObject.name.Contains("Idle")){
-                instructions.Add(new Tuple<string, float>("Idle", float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text)));
-            }else if(instruction.gameObject.name.Contains("If Statement")){
-                if(true){ // condition
-                    instruction.gameObject.GetComponentInChildren<ProgramPanel>().OnRunProgram();
+    public void BuildInstructions(){
+        List<string> operations = new List<string>{"Move Forward", "Turn Right", "Turn Left", "Idle"};
+        foreach (Transform instruction in transform){ // iterate children of this object
+            float val = float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text);
+            foreach (string operation in operations){
+                if(instruction.gameObject.name.Contains(operation)){
+                    instructions.Add(new InstructionSet("operation", new List<Instruction>{new Instruction(operation, val)}));
+                }
+            }
+            if(instruction.gameObject.name.Contains("If Statement") || instruction.gameObject.name.Contains("For Statement") || instruction.gameObject.name.Contains("While Statement")){
+                Transform conditionalOperations = instruction.Find("Conditional Operations");
+                List<Instruction> instructionList = new List<Instruction>();
+                if(instruction.gameObject.name.Contains("If Statement")){
+                    instructions.Add(new InstructionSet("conditional", instructionList, null, null));
+                }else if(instruction.gameObject.name.Contains("For Statement")){
+                    instructions.Add(new InstructionSet("for loop", instructionList, int.Parse(instruction.Find("Input Field").GetComponent<TMP_InputField>().text)));
+                }else if(instruction.gameObject.name.Contains("While Statement")){
+                    instructions.Add(new InstructionSet("while loop", instructionList, null, null));
+                }
+                foreach (Transform conditionalInstruction in conditionalOperations){
+                    float conditionalVal = float.Parse(conditionalInstruction.GetComponentInChildren<TMP_InputField>().text);
+                    foreach (string operation in operations){
+                        if(conditionalInstruction.gameObject.name.Contains(operation)){
+                            instructionList.Add(new Instruction(operation, conditionalVal));
+                        }
+                    }
                 }
             }
         }

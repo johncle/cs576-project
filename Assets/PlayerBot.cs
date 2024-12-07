@@ -8,91 +8,139 @@ public class PlayerBot : MonoBehaviour
     float moveSpeed;
     float rotationSpeed;
 
-    bool isRunningInstructions;
-
-    bool isMovingForwards;
-    bool isTurningRight;
-    bool isTurningLeft;
-    bool isIdling;
-
-    float distanceToGo;
-    float degreesToGo;
-    float timeLeftToIdle;
-
-    List<Tuple<string, float>> activeInstructions;
-
     // Start is called before the first frame update
     void Start()
     {
         moveSpeed = 5.0f;
-        rotationSpeed = 70.0f;
-        isRunningInstructions = false;
-        isMovingForwards = false;
-        isTurningRight = false;
-        isTurningLeft = false;
-        isIdling = false;
+        rotationSpeed = 90.0f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(isRunningInstructions){
-            if(isMovingForwards && distanceToGo > 0){
-                Vector3 moveDirection = moveSpeed * new Vector3(0, 0, 1) * Time.deltaTime;
-                distanceToGo -= moveDirection.magnitude;
-                transform.Translate(moveDirection);
-            }else if(isMovingForwards && distanceToGo <= 0){
-                isMovingForwards = false;
-                RunInstruction(activeInstructions);
+    IEnumerator RunProgram(List<InstructionSet> instructions){
+        while(instructions.Count > 0){
+            List<Instruction> instructionList = instructions[0].instructionList;
+            if(instructions[0].type == "operation"){
+                Instruction instruction = instructionList[0];
+                float val = instruction.value;
+                if(instruction.name == "Move Forward"){
+                    while(val > 0){
+                        Vector3 moveDirection = moveSpeed * new Vector3(0, 0, 1) * Time.deltaTime;
+                        val -= moveDirection.magnitude;
+                        transform.Translate(moveDirection);
+                        yield return null;
+                    }
+                }else if(instruction.name == "Turn Right"){
+                    while(val > 0){
+                        Vector3 rotateDirection = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
+                        val -= rotateDirection.magnitude;
+                        transform.Rotate(rotateDirection);
+                        yield return null;
+                    }
+                }else if(instruction.name == "Turn Left"){
+                    while(val > 0){
+                        Vector3 rotateDirection = new Vector3(0, -rotationSpeed * Time.deltaTime, 0);
+                        val -= rotateDirection.magnitude;
+                        transform.Rotate(rotateDirection);
+                        yield return null;
+                    }
+                }else if(instruction.name == "Idle"){
+                    yield return new WaitForSeconds(val);
+                }
+            }else if(instructions[0].type == "conditional"){
+                if(true){
+                    foreach(Instruction instruction in instructionList){
+                        float val = instruction.value;
+                        if(instruction.name == "Move Forward"){
+                            while(val > 0){
+                                Vector3 moveDirection = moveSpeed * new Vector3(0, 0, 1) * Time.deltaTime;
+                                val -= moveDirection.magnitude;
+                                transform.Translate(moveDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Right"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Left"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, -rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Idle"){
+                            yield return new WaitForSeconds(val);
+                        }
+                    }
+                }
+            }else if(instructions[0].type == "for loop"){
+                for(int i = 0; i < instructions[0].numIterations; i++){
+                    foreach(Instruction instruction in instructionList){
+                        float val = instruction.value;
+                        if(instruction.name == "Move Forward"){
+                            while(val > 0){
+                                Vector3 moveDirection = moveSpeed * new Vector3(0, 0, 1) * Time.deltaTime;
+                                val -= moveDirection.magnitude;
+                                transform.Translate(moveDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Right"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Left"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, -rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Idle"){
+                            yield return new WaitForSeconds(val);
+                        }
+                    }
+                }
+            }else if(instructions[0].type == "while loop"){
+                while(true){
+                    foreach(Instruction instruction in instructionList){
+                        float val = instruction.value;
+                        if(instruction.name == "Move Forward"){
+                            while(val > 0){
+                                Vector3 moveDirection = moveSpeed * new Vector3(0, 0, 1) * Time.deltaTime;
+                                val -= moveDirection.magnitude;
+                                transform.Translate(moveDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Right"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Turn Left"){
+                            while(val > 0){
+                                Vector3 rotateDirection = new Vector3(0, -rotationSpeed * Time.deltaTime, 0);
+                                val -= rotateDirection.magnitude;
+                                transform.Rotate(rotateDirection);
+                                yield return null;
+                            }
+                        }else if(instruction.name == "Idle"){
+                            yield return new WaitForSeconds(val);
+                        }
+                    }
+                }
             }
-
-            if(isTurningRight && degreesToGo > 0){
-                Vector3 rotateDirection = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
-                degreesToGo -= rotateDirection.magnitude;
-                transform.Rotate(rotateDirection);
-            }else if(isTurningRight && degreesToGo <= 0){
-                isTurningRight = false;
-                RunInstruction(activeInstructions);
-            }
-
-            if(isTurningLeft && degreesToGo > 0){
-                Vector3 rotateDirection = new Vector3(0, -rotationSpeed * Time.deltaTime, 0);
-                degreesToGo -= rotateDirection.magnitude;
-                transform.Rotate(rotateDirection);
-            }else if(isTurningLeft && degreesToGo <= 0){
-                isTurningLeft = false;
-                RunInstruction(activeInstructions);
-            }
-
-            if(isIdling && timeLeftToIdle > 0){
-                timeLeftToIdle -= Time.deltaTime;
-            }else if(isIdling && timeLeftToIdle <= 0){
-                isIdling = false;
-                RunInstruction(activeInstructions);
-            }
+            instructions.RemoveAt(0);
         }
     }
 
-    public void RunInstruction(List<Tuple<string, float>> instructions){
-        if(instructions.Count == 0){
-            isRunningInstructions = false;
-            return;
-        }
-        activeInstructions = instructions;
-        isRunningInstructions = true;
-        if(instructions[0].Item1 == "Move Forward"){
-            distanceToGo = instructions[0].Item2;
-            isMovingForwards = true;
-        }else if(instructions[0].Item1 == "Turn Right"){
-            degreesToGo = instructions[0].Item2;
-            isTurningRight = true;
-        }else if(instructions[0].Item1 == "Turn Left"){
-            degreesToGo = instructions[0].Item2;
-            isTurningLeft = true;
-        }else if(instructions[0].Item1 == "Idle"){
-            timeLeftToIdle = instructions[0].Item2;
-            isIdling = true;
-        }
-        instructions.RemoveAt(0);
+    public void RunInstruction(List<InstructionSet> instructions){
+        StartCoroutine(RunProgram(instructions));
     }
 }

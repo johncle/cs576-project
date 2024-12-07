@@ -10,7 +10,6 @@ public class DraggedInstruction : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     RectTransform operationsBounds;
 
-    public GameObject draggedInstruction;
     public GameObject operation;
     public GameObject draggedInstructionPanel;
     public GameObject programPanel;
@@ -27,7 +26,7 @@ public class DraggedInstruction : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
 
     public void OnBeginDrag(PointerEventData e){
-        instructionInstance = Instantiate(draggedInstruction, gameObject.transform.position, Quaternion.identity, draggedInstructionPanel.transform);
+        instructionInstance = Instantiate(gameObject, gameObject.transform.position, Quaternion.identity, draggedInstructionPanel.transform);
     }
 
     public void OnDrag(PointerEventData e){
@@ -39,7 +38,7 @@ public class DraggedInstruction : MonoBehaviour, IBeginDragHandler, IDragHandler
         Destroy(instructionInstance);
         programHighlight.color = new Color32(255, 255, 255, 0);
 
-        if(!operation.name.Contains("If Statement")){
+        if(!(operation.name.Contains("If Statement") || operation.name.Contains("For Statement") || operation.name.Contains("While Statement"))){
             foreach (Transform childOperation in programPanel.transform){
                 if(childOperation.gameObject.tag == "Conditional"){
                     Transform conditionalOps = childOperation.Find("Conditional Operations");
