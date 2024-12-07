@@ -7,8 +7,9 @@ public class PatrolAndChase : MonoBehaviour
 {
     public Transform player;
     public Transform[] waypoints;
-    public float detectionRadius = 10f;
-    public float fieldOfViewAngle = 90f;
+    public float detectionRadius = 5f;
+    public float stopRadius = 8f;
+    public float fieldOfViewAngle = 100f;
     public float patrolSpeed = 2f;
     public float chaseSpeed = 4f;
 
@@ -50,6 +51,7 @@ public class PatrolAndChase : MonoBehaviour
     {
         target = waypoints[waypointIndex].position;
         agent.SetDestination(target);
+        Debug.Log("New destination: " + waypointIndex);
     }
 
     void IterateWaypointIndex()
@@ -86,7 +88,7 @@ public class PatrolAndChase : MonoBehaviour
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
-        if (distanceToPlayer > detectionRadius || angleToPlayer > fieldOfViewAngle / 2)
+        if (distanceToPlayer > stopRadius) //if (distanceToPlayer > stopRadius || angleToPlayer > fieldOfViewAngle / 2)
         {
             isChasing = false;
             agent.speed = patrolSpeed;
