@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Operation
   - Conditional
+  - Expression Builder
   layers:
   - Default
   - TransparentFX
