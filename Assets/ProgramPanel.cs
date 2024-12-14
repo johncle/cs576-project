@@ -50,7 +50,7 @@ public class ProgramPanel : MonoBehaviour
 
     public GameObject expressionBuilderPrefab;
 
-    public GameObject expressionBuilderInstance;
+    GameObject expressionBuilderInstance;
 
     GameObject canvas;
 

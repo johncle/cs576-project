@@ -51,7 +51,6 @@ public class PatrolAndChase : MonoBehaviour
     {
         target = waypoints[waypointIndex].position;
         agent.SetDestination(target);
-        Debug.Log("New destination: " + waypointIndex);
     }
 
     void IterateWaypointIndex()
