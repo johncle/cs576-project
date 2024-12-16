@@ -8,6 +8,10 @@ public class PlayerBot : MonoBehaviour
     float moveSpeed;
     float rotationSpeed;
     CharacterController characterController;
+    Animator animator;
+    public bool isMoving;
+    public bool isTurning;
+    public bool isDead = false; // set by LevelLosePanel.cs via TriggerDeath()
 
     Coroutine playerCoroutine;
 
@@ -27,10 +31,23 @@ public class PlayerBot : MonoBehaviour
         {
             Debug.LogError("CharacterController is missing!");
         }
+
+        GameObject[] playerPrefab = GameObject.FindGameObjectsWithTag("PlayerPrefab");
+        if (playerPrefab.Length == 0)
+        {
+            Debug.LogError("Player prefab (JR-1 mod1...) is missing!");
+        }
+        animator = playerPrefab[0].GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("PlayerAnimator in prefab is missing!");
+        }
     }
 
-    void Update(){
-        if(stopProgram){
+    void Update()
+    {
+        if (stopProgram)
+        {
             StopCoroutine(playerCoroutine);
         }
     }
@@ -44,51 +61,7 @@ public class PlayerBot : MonoBehaviour
             if (instructions[0].type == "operation")
             {
                 Instruction instruction = instructionList[0];
-                float val = instruction.value;
-
-                if (instruction.name == "Move Forward")
-                {
-                    while (val > 0)
-                    {
-                        Vector3 moveDirection = transform.forward * moveSpeed * Time.deltaTime;
-                        val -= moveDirection.magnitude;
-
-                        // Use CharacterController to move
-                        characterController.Move(moveDirection);
-
-                        yield return null;
-                    }
-                }
-                else if (instruction.name == "Turn Right")
-                {
-                    while (val > 0)
-                    {
-                        float rotation = rotationSpeed * Time.deltaTime;
-                        val -= rotation;
-
-                        // Rotate the bot
-                        transform.Rotate(0, rotation, 0);
-
-                        yield return null;
-                    }
-                }
-                else if (instruction.name == "Turn Left")
-                {
-                    while (val > 0)
-                    {
-                        float rotation = rotationSpeed * Time.deltaTime;
-                        val -= rotation;
-
-                        // Rotate the bot
-                        transform.Rotate(0, -rotation, 0);
-
-                        yield return null;
-                    }
-                }
-                else if (instruction.name == "Idle")
-                {
-                    yield return new WaitForSeconds(val);
-                }
+                yield return RunInstructionHelper(instruction);
             }
             else if (instructions[0].type == "conditional")
             {
@@ -96,48 +69,7 @@ public class PlayerBot : MonoBehaviour
                 {
                     foreach (Instruction instruction in instructionList)
                     {
-                        float val = instruction.value;
-
-                        if (instruction.name == "Move Forward")
-                        {
-                            while (val > 0)
-                            {
-                                Vector3 moveDirection = transform.forward * moveSpeed * Time.deltaTime;
-                                val -= moveDirection.magnitude;
-
-                                characterController.Move(moveDirection);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Right")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Left")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, -rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Idle")
-                        {
-                            yield return new WaitForSeconds(val);
-                        }
+                        yield return RunInstructionHelper(instruction);
                     }
                 }
             }
@@ -147,48 +79,7 @@ public class PlayerBot : MonoBehaviour
                 {
                     foreach (Instruction instruction in instructionList)
                     {
-                        float val = instruction.value;
-
-                        if (instruction.name == "Move Forward")
-                        {
-                            while (val > 0)
-                            {
-                                Vector3 moveDirection = transform.forward * moveSpeed * Time.deltaTime;
-                                val -= moveDirection.magnitude;
-
-                                characterController.Move(moveDirection);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Right")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Left")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, -rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Idle")
-                        {
-                            yield return new WaitForSeconds(val);
-                        }
+                        yield return RunInstructionHelper(instruction);
                     }
                 }
             }
@@ -198,58 +89,96 @@ public class PlayerBot : MonoBehaviour
                 {
                     foreach (Instruction instruction in instructionList)
                     {
-                        float val = instruction.value;
-
-                        if (instruction.name == "Move Forward")
-                        {
-                            while (val > 0)
-                            {
-                                Vector3 moveDirection = transform.forward * moveSpeed * Time.deltaTime;
-                                val -= moveDirection.magnitude;
-
-                                characterController.Move(moveDirection);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Right")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Turn Left")
-                        {
-                            while (val > 0)
-                            {
-                                float rotation = rotationSpeed * Time.deltaTime;
-                                val -= rotation;
-
-                                transform.Rotate(0, -rotation, 0);
-
-                                yield return null;
-                            }
-                        }
-                        else if (instruction.name == "Idle")
-                        {
-                            yield return new WaitForSeconds(val);
-                        }
+                        yield return RunInstructionHelper(instruction);
                     }
                 }
             }
 
             instructions.RemoveAt(0);
+
+            // idle animation after performing all instructions
+            isMoving = false;
+            isTurning = false;
+            animator.SetBool("isMoving", isMoving);
         }
     }
 
     public void RunInstruction(List<InstructionSet> instructions)
     {
         playerCoroutine = StartCoroutine(RunProgram(instructions));
+    }
+
+    IEnumerator RunInstructionHelper(Instruction instruction)
+    {
+        float val = instruction.value;
+        if (instruction.name == "Move Forward")
+        {
+            // move forwards animation
+            isMoving = true;
+            isTurning = false;
+            animator.SetBool("isMoving", isMoving);
+
+            while (val > 0)
+            {
+                Vector3 moveDirection = transform.forward * moveSpeed * Time.deltaTime;
+                val -= moveDirection.magnitude;
+
+                // Use CharacterController to move
+                characterController.Move(moveDirection);
+
+                yield return null;
+            }
+        }
+        else if (instruction.name == "Turn Right")
+        {
+            // idle animation (bot doesnt move horizontally when turning)
+            isMoving = false;
+            isTurning = true;
+            animator.SetBool("isMoving", isMoving);
+
+            while (val > 0)
+            {
+                float rotation = rotationSpeed * Time.deltaTime;
+                val -= rotation;
+
+                // Rotate the bot
+                transform.Rotate(0, rotation, 0);
+
+                yield return null;
+            }
+        }
+        else if (instruction.name == "Turn Left")
+        {
+            // idle animation (bot doesnt move horizontally when turning)
+            isMoving = false;
+            isTurning = true;
+            animator.SetBool("isMoving", isMoving);
+
+            while (val > 0)
+            {
+                float rotation = rotationSpeed * Time.deltaTime;
+                val -= rotation;
+
+                // Rotate the bot
+                transform.Rotate(0, -rotation, 0);
+
+                yield return null;
+            }
+        }
+        else if (instruction.name == "Idle")
+        {
+            // idle animation
+            isMoving = false;
+            isTurning = false;
+            animator.SetBool("isMoving", isMoving);
+
+            yield return new WaitForSeconds(val);
+        }
+    }
+
+    public void TriggerDeath()
+    {
+        animator.SetTrigger("death");
+        isDead = true;
     }
 }

@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 public class LevelLosePanel : MonoBehaviour
 {
     public GameObject LevelLoseCanvas;
+    PlayerBot playerBot;
 
     bool hasLost;
 
     void Start(){
         hasLost = false;
+
+        playerBot = GetComponent<PlayerBot>(); // to trigger player death
+        if (playerBot == null)
+        {
+            Debug.LogError("PlayerBot is missing!");
+        }
     }
 
     void OnTriggerEnter(Collider other){
@@ -18,6 +25,8 @@ public class LevelLosePanel : MonoBehaviour
             LevelLoseCanvas.SetActive(true);
             gameObject.GetComponent<PlayerBot>().stopProgram = true;
             hasLost = true;
+
+            playerBot.TriggerDeath();
         }
     }
 

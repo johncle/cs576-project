@@ -8,6 +8,7 @@ TagManager:
   - Conditional
   - Expression Builder
   - Enemy
+  - PlayerPrefab
   layers:
   - Default
   - TransparentFX
