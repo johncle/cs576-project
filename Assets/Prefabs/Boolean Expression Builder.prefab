@@ -171,10 +171,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1953285360313136222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -18.48999, y: -18.380005}
-  m_SizeDelta: {x: 37.03247, y: 37.0325}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &880436355305396267
 GameObject:
@@ -210,7 +210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -202.65125, y: 35.732925}
+  m_AnchoredPosition: {x: -202.65126, y: 35.732925}
   m_SizeDelta: {x: 841.928, y: 438.3133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3073469682509983003
@@ -337,8 +337,8 @@ RectTransform:
   - {fileID: 4827837978749321873}
   - {fileID: 189975165581645828}
   - {fileID: 2604412953694888519}
-  - {fileID: 9007525017694692635}
   - {fileID: 3032189424337362560}
+  - {fileID: 9007525017694692635}
   - {fileID: 5384742309215543301}
   - {fileID: 2029449489618824939}
   m_Father: {fileID: 0}
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.61960787}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -531,9 +531,9 @@ GameObject:
   - component: {fileID: 2931734202776231206}
   - component: {fileID: 6696427003888470435}
   - component: {fileID: 3099911053706235590}
-  - component: {fileID: 6561286454120380109}
+  - component: {fileID: 5247238639903088917}
   m_Layer: 5
-  m_Name: Keycard Color Icon
+  m_Name: Bool Value Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,8 +556,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000022932, y: -109}
-  m_SizeDelta: {x: 357.5868, y: 56.7652}
+  m_AnchoredPosition: {x: -0.0011676, y: -109.7}
+  m_SizeDelta: {x: 299.4591, y: 56.7652}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6696427003888470435
 CanvasRenderer:
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6561286454120380109
+--- !u!114 &5247238639903088917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834a83a560fe2e84081156dc7fc03180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  operation: {fileID: 6945331046420873061, guid: fb2ae09d865aae74fae808e4938c2f78, type: 3}
+  operation: {fileID: 5568247694941929590, guid: c432bf59826925c4cab0b7f98776635d, type: 3}
   draggedValuesPanel: {fileID: 338958992623846544}
   expressionBuilderPanel: {fileID: 4701590344219584332}
 --- !u!1 &4008461904284742135
@@ -1396,7 +1396,7 @@ GameObject:
   - component: {fileID: 7955258551940935019}
   - component: {fileID: 8394034948600910951}
   m_Layer: 5
-  m_Name: Keycard Color Text
+  m_Name: Bool Value Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1418,8 +1418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0000013113}
-  m_SizeDelta: {x: 324.9838, y: 19.3793}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.000045776367}
+  m_SizeDelta: {x: 255.3393, y: 17.7342}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7955258551940935019
 CanvasRenderer:
@@ -1449,7 +1449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: held keycard color
+  m_text: sensor detects
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 062906f8ffa2f3240a7c00fd34806b57, type: 2}
   m_sharedMaterial: {fileID: -6811212675540312623, guid: 062906f8ffa2f3240a7c00fd34806b57, type: 2}

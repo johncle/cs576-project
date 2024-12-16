@@ -11,9 +11,13 @@ public class PlayerBot : MonoBehaviour
 
     Coroutine playerCoroutine;
 
+    public bool stopProgram;
+
     // Start is called before the first frame update
     void Start()
     {
+        stopProgram = false;
+
         moveSpeed = 5.0f;
         rotationSpeed = 90.0f;
 
@@ -25,8 +29,10 @@ public class PlayerBot : MonoBehaviour
         }
     }
 
-    public void stopPlayerProgram(){
-        StopCoroutine(playerCoroutine);
+    void Update(){
+        if(stopProgram){
+            StopCoroutine(playerCoroutine);
+        }
     }
 
     IEnumerator RunProgram(List<InstructionSet> instructions)
@@ -86,7 +92,7 @@ public class PlayerBot : MonoBehaviour
             }
             else if (instructions[0].type == "conditional")
             {
-                if (gameObject.GetComponent<PlayerInventory>().HasKeycard(instructions[0].boolValues[0]))
+                if (true) // Condition handling logic
                 {
                     foreach (Instruction instruction in instructionList)
                     {

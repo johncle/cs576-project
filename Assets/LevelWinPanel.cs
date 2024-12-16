@@ -10,7 +10,7 @@ public class LevelWinPanel : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
             LevelWinCanvas.SetActive(true);
-            other.gameObject.GetComponent<PlayerBot>().stopPlayerProgram();
+            other.gameObject.GetComponent<PlayerBot>().stopProgram = true;
         }
     }
 

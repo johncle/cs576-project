@@ -16,8 +16,7 @@ public class LevelLosePanel : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Enemy" && !hasLost){
             LevelLoseCanvas.SetActive(true);
-            gameObject.GetComponent<PlayerBot>().stopPlayerProgram();
-            Time.timeScale = 0;
+            gameObject.GetComponent<PlayerBot>().stopProgram = true;
             hasLost = true;
         }
     }
