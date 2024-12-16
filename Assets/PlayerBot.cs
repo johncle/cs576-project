@@ -9,6 +9,8 @@ public class PlayerBot : MonoBehaviour
     float rotationSpeed;
     CharacterController characterController;
 
+    public Coroutine playerCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -238,6 +240,6 @@ public class PlayerBot : MonoBehaviour
 
     public void RunInstruction(List<InstructionSet> instructions)
     {
-        StartCoroutine(RunProgram(instructions));
+        playerCoroutine = StartCoroutine(RunProgram(instructions));
     }
 }
