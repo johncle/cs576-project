@@ -60,16 +60,48 @@ public class ProgramPanel : MonoBehaviour
     public GameObject runProgramButton;
     public GameObject resetButton;
 
+    GameObject randomKeycard;
+
     void Start(){
         playerBot = GameObject.Find("Player Bot");
         canvas = GameObject.Find("Canvas");
+
+        randomKeycard = GameObject.Find("Random Keycard");
     }
+
+    public Material Red;
+    public Material Green;
+    public Material Blue;
 
     public void BuildInstructions(){
         selectExpressionsWarning.SetActive(false);
 
         runProgramButton.SetActive(false);
         resetButton.SetActive(true);
+
+        if(randomKeycard != null){
+            randomKeycard.GetComponent<Keycard>().stopAnimating();
+
+            int randNum = UnityEngine.Random.Range(1, 4);
+
+            Keycard keycardScript = randomKeycard.GetComponent<Keycard>();
+
+            Light pointLight = randomKeycard.GetComponentInChildren<Light>();
+
+            if(randNum == 1){
+                keycardScript.keycardID = "Red";
+                randomKeycard.GetComponent<Renderer>().material = Red;
+                pointLight.color = Color.red;
+            }else if(randNum == 2){
+                keycardScript.keycardID = "Green";
+                randomKeycard.GetComponent<Renderer>().material = Green;
+                pointLight.color = Color.green;
+            }else{
+                keycardScript.keycardID = "Blue";
+                randomKeycard.GetComponent<Renderer>().material = Blue;
+                pointLight.color = Color.blue;
+            }
+        }
 
         instructions = new List<InstructionSet>();
         List<string> operations = new List<string>{"Move Forward", "Turn Right", "Turn Left", "Idle"};
@@ -90,7 +122,8 @@ public class ProgramPanel : MonoBehaviour
                         selectExpressionsWarning.SetActive(true);
                         return;
                     }
-                    instructions.Add(new InstructionSet("conditional", instructionList, null, null));
+                    string boolVal = expBuilderPanel.GetChild(0).GetComponent<KeycardColorSelect>().selectedColor;
+                    instructions.Add(new InstructionSet("conditional", instructionList, new List<string>{boolVal}, null));
                 }else if(instruction.gameObject.name.Contains("For Statement")){
                     instructions.Add(new InstructionSet("for loop", instructionList, int.Parse(instruction.Find("Input Field").GetComponent<TMP_InputField>().text)));
                 }else if(instruction.gameObject.name.Contains("While Statement")){
