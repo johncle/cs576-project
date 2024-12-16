@@ -7,6 +7,7 @@ TagManager:
   - Operation
   - Conditional
   - Expression Builder
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -9,11 +9,15 @@ public class PlayerBot : MonoBehaviour
     float rotationSpeed;
     CharacterController characterController;
 
-    public Coroutine playerCoroutine;
+    Coroutine playerCoroutine;
+
+    public bool stopProgram;
 
     // Start is called before the first frame update
     void Start()
     {
+        stopProgram = false;
+
         moveSpeed = 5.0f;
         rotationSpeed = 90.0f;
 
@@ -22,6 +26,12 @@ public class PlayerBot : MonoBehaviour
         if (characterController == null)
         {
             Debug.LogError("CharacterController is missing!");
+        }
+    }
+
+    void Update(){
+        if(stopProgram){
+            StopCoroutine(playerCoroutine);
         }
     }
 

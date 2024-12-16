@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Instruction {
@@ -56,6 +57,9 @@ public class ProgramPanel : MonoBehaviour
 
     public GameObject selectExpressionsWarning;
 
+    public GameObject runProgramButton;
+    public GameObject resetButton;
+
     void Start(){
         playerBot = GameObject.Find("Player Bot");
         canvas = GameObject.Find("Canvas");
@@ -63,6 +67,10 @@ public class ProgramPanel : MonoBehaviour
 
     public void BuildInstructions(){
         selectExpressionsWarning.SetActive(false);
+
+        runProgramButton.SetActive(false);
+        resetButton.SetActive(true);
+
         instructions = new List<InstructionSet>();
         List<string> operations = new List<string>{"Move Forward", "Turn Right", "Turn Left", "Idle"};
         foreach (Transform instruction in transform){ // iterate children of this object
@@ -137,5 +145,9 @@ public class ProgramPanel : MonoBehaviour
         }else{
             expressionBuilderInstance.SetActive(true);
         }
+    }
+
+    public void OnReset(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
