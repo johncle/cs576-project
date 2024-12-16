@@ -15,13 +15,9 @@ public class PlayerBot : MonoBehaviour
 
     Coroutine playerCoroutine;
 
-    public bool stopProgram;
-
     // Start is called before the first frame update
     void Start()
     {
-        stopProgram = false;
-
         moveSpeed = 5.0f;
         rotationSpeed = 90.0f;
 
@@ -44,12 +40,8 @@ public class PlayerBot : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (stopProgram)
-        {
-            StopCoroutine(playerCoroutine);
-        }
+    public void stopPlayerProgram(){
+        StopCoroutine(playerCoroutine);
     }
 
     IEnumerator RunProgram(List<InstructionSet> instructions)
