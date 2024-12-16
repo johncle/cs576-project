@@ -17,6 +17,7 @@ public class LevelLosePanel : MonoBehaviour
         if(other.gameObject.tag == "Enemy" && !hasLost){
             LevelLoseCanvas.SetActive(true);
             gameObject.GetComponent<PlayerBot>().stopPlayerProgram();
+            Time.timeScale = 0;
             hasLost = true;
         }
     }
