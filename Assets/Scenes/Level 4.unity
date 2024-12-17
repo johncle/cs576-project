@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f6833f87849ab7347bfeb09af7294750, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fd716508b5ac50e42958bbbdea95c75e, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &43040318
 Transform:
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alertRange: 20
-  player: {fileID: 0}
+  player: {fileID: 1836728678}
 --- !u!114 &69994232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRange: 50
   sightAngle: 90
-  player: {fileID: 0}
+  player: {fileID: 1836728678}
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2398,7 +2398,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6846263688970170761, guid: 46cb3d79584ed5b4d9f6bf07a18b279f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6846263688970170761, guid: 46cb3d79584ed5b4d9f6bf07a18b279f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2406,7 +2406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6846263688970170761, guid: 46cb3d79584ed5b4d9f6bf07a18b279f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.93
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 6846263688970170761, guid: 46cb3d79584ed5b4d9f6bf07a18b279f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4640,7 +4640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5f6a08810a5b02e42a070872278015cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.52
+      value: 1.81
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5f6a08810a5b02e42a070872278015cb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7352,7 +7352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alertRange: 20
-  player: {fileID: 807126702}
+  player: {fileID: 1836728678}
 --- !u!114 &807126704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15251,6 +15251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Bot
       objectReference: {fileID: 0}
+    - target: {fileID: 7589347033785080927, guid: 14cdb60877a88bc5f9f44df02d1b4dcf, type: 3}
+      propertyPath: LevelLoseCanvas
+      value: 
+      objectReference: {fileID: 185641341}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15259,6 +15263,11 @@ PrefabInstance:
 --- !u!4 &1836728677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1318018027597527316, guid: 14cdb60877a88bc5f9f44df02d1b4dcf, type: 3}
+  m_PrefabInstance: {fileID: 1836728676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1836728678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 196628694196265721, guid: 14cdb60877a88bc5f9f44df02d1b4dcf, type: 3}
   m_PrefabInstance: {fileID: 1836728676}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1865152259
