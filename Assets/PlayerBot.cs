@@ -12,6 +12,7 @@ public class PlayerBot : MonoBehaviour
     public bool isMoving;
     public bool isTurning;
     public bool isDead = false; // set by LevelLosePanel.cs via TriggerDeath()
+    public bool hasWon = false; // set by LevelWinPanel.cs via SetWin()
 
     Coroutine playerCoroutine;
 
@@ -45,7 +46,8 @@ public class PlayerBot : MonoBehaviour
         }
     }
 
-    public void stopPlayerProgram(){
+    public void stopPlayerProgram()
+    {
         StopCoroutine(playerCoroutine);
     }
 
@@ -203,5 +205,13 @@ public class PlayerBot : MonoBehaviour
     {
         animator.SetTrigger("death");
         isDead = true;
+    }
+
+    public void SetWin()
+    {
+        isMoving = false;
+        isTurning = false;
+        animator.SetBool("isMoving", isMoving);
+        hasWon = true;
     }
 }

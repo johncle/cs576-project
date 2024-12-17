@@ -15,7 +15,8 @@ public class PlayerSoundManager : MonoBehaviour
     PlayerBot playerBot;
     bool hasStartedMoving = false;
     bool hasStartedTurning = false;
-    bool hasDied = false; // to stop death sound from repeating
+    bool hasDied = false; // to stop death condition from repeating
+    bool hasWon = false; // to stop win condition from repeating
 
     void Start()
     {
@@ -54,8 +55,16 @@ public class PlayerSoundManager : MonoBehaviour
             hasDied = true;
         }
 
-        // dont play if dead
-        if (!hasDied)
+        if (playerBot.hasWon && !hasWon)
+        {
+            StopMovingSound();
+            StopTurningSound();
+            PlayStopMovingSound();
+            hasWon = true;
+        }
+
+        // dont play if dead or won
+        if (!hasDied && !playerBot.hasWon)
         {
             if (playerBot.isMoving)
             {
@@ -64,7 +73,6 @@ public class PlayerSoundManager : MonoBehaviour
                 {
                     StartCoroutine(PlayStartMovingSound());
                     hasStartedMoving = true;
-                    Debug.Log("started moving");
                 }
             }
             else
@@ -74,7 +82,6 @@ public class PlayerSoundManager : MonoBehaviour
                     StopMovingSound();
                     PlayStopMovingSound();
                     hasStartedMoving = false;
-                    Debug.Log("stopped moving");
                 }
 
             }
@@ -85,7 +92,6 @@ public class PlayerSoundManager : MonoBehaviour
                 {
                     PlayTurningSound();
                     hasStartedTurning = true;
-                    Debug.Log("started turning");
                 }
             }
             else
@@ -94,7 +100,6 @@ public class PlayerSoundManager : MonoBehaviour
                 {
                     StopTurningSound();
                     hasStartedTurning = false;
-                    Debug.Log("stopped turning");
                 }
             }
         }
