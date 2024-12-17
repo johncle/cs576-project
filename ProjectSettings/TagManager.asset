@@ -9,6 +9,9 @@ TagManager:
   - Expression Builder
   - Enemy
   - PlayerPrefab
+  - GameUI
+  - TitleText
+  - TitleDescription
   layers:
   - Default
   - TransparentFX
