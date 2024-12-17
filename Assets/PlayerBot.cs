@@ -24,7 +24,7 @@ public class PlayerBot : MonoBehaviour
         moveSpeed = 7.0f;
         rotationSpeed = 120.0f;
         gravityForce = 10.0f;
-        jumpPower = 5.0f;
+        jumpPower = 7.0f;
 
         // Get the CharacterController component
         characterController = GetComponent<CharacterController>();
@@ -185,7 +185,7 @@ public class PlayerBot : MonoBehaviour
         {
             // Custom jump physics (forward Euler)
             float startingElevation = transform.position.y;
-            Vector3 velocity = (transform.up + transform.forward) * jumpPower;
+            Vector3 velocity = new Vector3(0, 1, 1) * jumpPower;
             while (transform.position.y >= startingElevation)
             {
                 // modify velocity according to gravity force
