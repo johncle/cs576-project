@@ -12,6 +12,7 @@ TagManager:
   - GameUI
   - TitleText
   - TitleDescription
+  - Floor
   layers:
   - Default
   - TransparentFX

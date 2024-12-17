@@ -74,10 +74,14 @@ public class ProgramPanel : MonoBehaviour
         instructions = new List<InstructionSet>();
         List<string> operations = new List<string>{"Move Forward", "Turn Right", "Turn Left", "Idle"};
         foreach (Transform instruction in transform){ // iterate children of this object
-            float val = float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text);
-            foreach (string operation in operations){
-                if(instruction.gameObject.name.Contains(operation)){
-                    instructions.Add(new InstructionSet("operation", new List<Instruction>{new Instruction(operation, val)}));
+            if(instruction.gameObject.name.Contains("Jump Forwards")){
+                instructions.Add(new InstructionSet("operation", new List<Instruction>{new Instruction("Jump Forwards", 1.0f)}));
+            }else{
+                float val = float.Parse(instruction.GetComponentInChildren<TMP_InputField>().text);
+                foreach (string operation in operations){
+                    if(instruction.gameObject.name.Contains(operation)){
+                        instructions.Add(new InstructionSet("operation", new List<Instruction>{new Instruction(operation, val)}));
+                    }
                 }
             }
             if(instruction.gameObject.name.Contains("If Statement") || instruction.gameObject.name.Contains("For Statement") || instruction.gameObject.name.Contains("While Statement")){

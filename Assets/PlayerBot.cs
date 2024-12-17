@@ -16,11 +16,16 @@ public class PlayerBot : MonoBehaviour
 
     Coroutine playerCoroutine;
 
+    float gravityForce;
+    float jumpPower;
+
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 5.0f;
-        rotationSpeed = 90.0f;
+        moveSpeed = 7.0f;
+        rotationSpeed = 120.0f;
+        gravityForce = 10.0f;
+        jumpPower = 7.0f;
 
         // Get the CharacterController component
         characterController = GetComponent<CharacterController>();
@@ -87,7 +92,17 @@ public class PlayerBot : MonoBehaviour
                     }
                 }
             }
-
+            else if (instructions[0].type == "while loop")
+            {
+                while (true)
+                {
+                    foreach (Instruction instruction in instructionList)
+                    {
+                        yield return RunInstructionHelper(instruction);
+                    }
+                }
+            }
+            
             instructions.RemoveAt(0);
 
             // idle animation after performing all instructions
@@ -167,6 +182,22 @@ public class PlayerBot : MonoBehaviour
             animator.SetBool("isMoving", isMoving);
 
             yield return new WaitForSeconds(val);
+        }
+        else if (instruction.name == "Jump Forwards")
+        {
+            // Custom jump physics (forward Euler)
+            float startingElevation = transform.position.y;
+            Vector3 velocity = new Vector3(0, 1, 1) * jumpPower;
+            while (transform.position.y >= startingElevation)
+            {
+                // modify velocity according to gravity force
+                velocity = new Vector3(velocity.x, velocity.y - (gravityForce * Time.deltaTime), velocity.z);
+
+                transform.Translate(velocity * Time.deltaTime);
+
+                yield return null;
+            }
+            transform.position = new Vector3(transform.position.x, startingElevation, transform.position.z);
         }
     }
 
