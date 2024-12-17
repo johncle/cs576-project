@@ -16,7 +16,12 @@ public class LevelWinPanel : MonoBehaviour
     }
 
     public void OnNextLevelClick(){
-        SceneManager.LoadScene("Level 1");
+        string[] sceneName = SceneManager.GetActiveScene().name.Split(" ");
+        int levelNum = int.Parse(sceneName[1]);
+        if(levelNum == 6){
+            return;
+        }
+        SceneManager.LoadScene("Level " + (levelNum + 1));
     }
 
     public void OnMainMenuClick(){
