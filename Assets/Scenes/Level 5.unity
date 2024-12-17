@@ -6960,6 +6960,7 @@ MonoBehaviour:
   targetBoxCollider: {fileID: 573920628}
   requiredKeycardIDs:
   - Red
+  doorOpenSound: {fileID: 8300000, guid: cd40336c13c9845b7b8600b21ee1dbcb, type: 3}
 --- !u!65 &573920632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13069,6 +13070,7 @@ MonoBehaviour:
   targetBoxCollider: {fileID: 1174810588}
   requiredKeycardIDs:
   - Blue
+  doorOpenSound: {fileID: 8300000, guid: cd40336c13c9845b7b8600b21ee1dbcb, type: 3}
 --- !u!65 &1174810592
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15591,6 +15593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keycardID: Blue
+  pickupSound: {fileID: 8300000, guid: 4dcedb9d59d0c4f22937d9ae69831435, type: 3}
 --- !u!65 &1394903208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18381,6 +18384,7 @@ MonoBehaviour:
   targetBoxCollider: {fileID: 1653306073}
   requiredKeycardIDs:
   - Green
+  doorOpenSound: {fileID: 8300000, guid: cd40336c13c9845b7b8600b21ee1dbcb, type: 3}
 --- !u!65 &1653306077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23042,6 +23046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9608dfebf7570d4eb33e0b99783341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
+  isTurning: 0
+  isDead: 0
 --- !u!114 &2105461591
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -468,7 +468,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f6833f87849ab7347bfeb09af7294750, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!4 &43040318
 Transform:
@@ -5552,6 +5552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keycardID: Green
+  pickupSound: {fileID: 8300000, guid: 4dcedb9d59d0c4f22937d9ae69831435, type: 3}
 --- !u!65 &458384842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11361,6 +11362,7 @@ MonoBehaviour:
   requiredKeycardIDs:
   - Blue
   - Green
+  doorOpenSound: {fileID: 8300000, guid: cd40336c13c9845b7b8600b21ee1dbcb, type: 3}
 --- !u!65 &1045292190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14379,6 +14381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keycardID: Blue
+  pickupSound: {fileID: 8300000, guid: 4dcedb9d59d0c4f22937d9ae69831435, type: 3}
 --- !u!65 &1394903208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16164,6 +16167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetBoxCollider: {fileID: 1272122567}
   requiredKeycardIDs: []
+  doorOpenSound: {fileID: 0}
 --- !u!65 &1564066024
 BoxCollider:
   m_ObjectHideFlags: 0
